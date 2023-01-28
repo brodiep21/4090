@@ -1,0 +1,19 @@
+mode: atomic
+github.com/brodiep21/4090/search/newegg.go:16.21,21.37 2 0
+github.com/brodiep21/4090/search/newegg.go:26.2,26.39 1 0
+github.com/brodiep21/4090/search/newegg.go:30.2,30.47 1 0
+github.com/brodiep21/4090/search/newegg.go:34.2,34.56 1 0
+github.com/brodiep21/4090/search/newegg.go:44.2,44.53 1 0
+github.com/brodiep21/4090/search/newegg.go:48.2,48.57 1 0
+github.com/brodiep21/4090/search/newegg.go:53.2,53.64 1 0
+github.com/brodiep21/4090/search/newegg.go:21.37,24.3 2 0
+github.com/brodiep21/4090/search/newegg.go:26.39,28.3 1 0
+github.com/brodiep21/4090/search/newegg.go:30.47,32.3 1 0
+github.com/brodiep21/4090/search/newegg.go:34.56,38.17 4 0
+github.com/brodiep21/4090/search/newegg.go:41.3,41.20 1 0
+github.com/brodiep21/4090/search/newegg.go:38.17,40.4 1 0
+github.com/brodiep21/4090/search/newegg.go:44.53,47.3 2 0
+github.com/brodiep21/4090/search/newegg.go:48.57,52.3 2 0
+github.com/brodiep21/4090/search/price.go:9.49,16.16 5 2
+github.com/brodiep21/4090/search/price.go:19.2,19.18 1 2
+github.com/brodiep21/4090/search/price.go:16.16,18.3 1 0
