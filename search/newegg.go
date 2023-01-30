@@ -7,13 +7,13 @@ import (
 )
 
 type Vcard struct {
-	Name  string
 	Price int
 	Link  string
-	Stock string
+	Stock bool
 }
 
 func SearchNewEgg() {
+	Vcards := []*Vcard{}
 
 	c := colly.NewCollector(colly.AllowedDomains("www.newegg.com"))
 
@@ -30,6 +30,18 @@ func SearchNewEgg() {
 	c.OnError(func(r *colly.Response, err error) {
 		fmt.Println("Error", err.Error())
 	})
+	//link associated with the card
+	c.OnHTML(".item-container", func(h *colly.HTMLElement) {
+		link := h.ChildAttr("a", "href")
+		// fmt.Println(link)
+		v := &Vcard{
+			Price: 0,
+			Link:  link,
+			Stock: true,
+		}
+		Vcards = append(Vcards, v)
+	})
+	count := 0
 	//price scrape
 	c.OnHTML(".price-current", func(h *colly.HTMLElement) {
 		span := h.DOM
@@ -38,17 +50,16 @@ func SearchNewEgg() {
 		if err != nil {
 			return
 		}
-		fmt.Println(cost)
+		Vcards[count].Price = cost
+		count++
+		fmt.Println(Vcards[0])
 	})
+	//checking availability of card
+	// c.OnHTML(".item-promo", func(r *colly.HTMLElement) {
+	// 	stock := r.Text
+	// 	fmt.Println(stock)
 
-	c.OnHTML(".item-promo", func(r *colly.HTMLElement) {
-		stock := r.Text
-		fmt.Println(stock)
-	})
-	c.OnHTML(".item-container", func(h *colly.HTMLElement) {
-		link := h.ChildAttr("a", "href")
-		fmt.Println(link)
+	// })
 
-	})
 	c.Visit("https://www.newegg.com/p/pl?N=100007709%20601408874")
 }

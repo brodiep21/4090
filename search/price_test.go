@@ -1,8 +1,9 @@
 package search_test
 
 import (
-	"github.com/brodiep21/4090/search"
 	"testing"
+
+	"github.com/brodiep21/4090/search"
 )
 
 func Test_priceConversion(t *testing.T) {
@@ -32,18 +33,12 @@ func Test_priceConversion(t *testing.T) {
 			t.Errorf("Got %d, want %d", got, want)
 		}
 	})
-	t.Run("Error for incorrect value", func(t *testing.T) {
-		t.Skip()
+	t.Run("Incorrect value produces error", func(t *testing.T) {
 		price := "badvalue"
 
-		want := 0
-		got, err := search.PriceConversion(price)
-		if err != nil {
+		_, err := search.PriceConversion(price)
+		if err == nil {
 			t.Error(err)
-		}
-
-		if want != got {
-			t.Errorf("Got %d, want %d", got, want)
 		}
 	})
 }
