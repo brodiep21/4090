@@ -52,7 +52,6 @@ func SearchNewEgg() {
 		}
 		Vcards[count].Price = cost
 		count++
-		fmt.Println(Vcards[0])
 	})
 	//checking availability of card
 	// c.OnHTML(".item-promo", func(r *colly.HTMLElement) {
