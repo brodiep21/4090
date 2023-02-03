@@ -14,6 +14,7 @@ type Vcard struct {
 
 func SearchNewEgg() {
 	Vcards := []*Vcard{}
+	fmt.Println(Vcards)
 
 	c := colly.NewCollector(colly.AllowedDomains("www.newegg.com"))
 
@@ -40,10 +41,12 @@ func SearchNewEgg() {
 			Stock: true,
 		}
 		Vcards = append(Vcards, v)
+		fmt.Println(Vcards)
 	})
-	count := 0
 	//price scrape
 	c.OnHTML(".price-current", func(h *colly.HTMLElement) {
+
+		count := 0
 		span := h.DOM
 		price := span.Find("strong").Text()
 		cost, err := PriceConversion(price)
@@ -51,12 +54,23 @@ func SearchNewEgg() {
 			return
 		}
 		Vcards[count].Price = cost
+		// checking availability of card
 		count++
 	})
-	//checking availability of card
-	// c.OnHTML(".item-promo", func(r *colly.HTMLElement) {
-	// 	stock := r.Text
-	// 	fmt.Println(stock)
+
+	// err := internal.Mailinfo()
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Println(Vcards[1:])
+	c.OnHTML(".item-promo", func(r *colly.HTMLElement) {
+		count = 0
+		if r.Text != "" {
+			// stock := r.Text
+			Vcards[count].Stock = false
+		}
+
+	// 	count++
 
 	// })
 
