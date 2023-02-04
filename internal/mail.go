@@ -22,4 +22,5 @@ func Mailinfo() error {
 	if err := d.DialAndSend(m); err != nil {
 		panic(err)
 	}
+	return nil
 }

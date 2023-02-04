@@ -2,19 +2,14 @@ package search
 
 import (
 	"fmt"
+	"strings"
 
+	"github.com/brodiep21/4090/internal/vcard"
 	"github.com/gocolly/colly"
 )
 
-type Vcard struct {
-	Price int
-	Link  string
-	Stock bool
-}
-
 func SearchNewEgg() {
-	Vcards := []*Vcard{}
-	fmt.Println(Vcards)
+	Vcards := []*vcard.Vcard{}
 
 	c := colly.NewCollector(colly.AllowedDomains("www.newegg.com"))
 
@@ -34,27 +29,23 @@ func SearchNewEgg() {
 	//link associated with the card
 	c.OnHTML(".item-container", func(h *colly.HTMLElement) {
 		link := h.ChildAttr("a", "href")
-		// fmt.Println(link)
-		v := &Vcard{
-			Price: 0,
-			Link:  link,
-			Stock: true,
-		}
+		v := vcard.New(0, link, true)
+
 		Vcards = append(Vcards, v)
-		fmt.Println(Vcards)
 	})
 	//price scrape
+	count := 0
 	c.OnHTML(".price-current", func(h *colly.HTMLElement) {
 
-		count := 0
 		span := h.DOM
 		price := span.Find("strong").Text()
+
 		cost, err := PriceConversion(price)
 		if err != nil {
 			return
 		}
 		Vcards[count].Price = cost
-		// checking availability of card
+		fmt.Println(Vcards[count])
 		count++
 	})
 
@@ -63,16 +54,19 @@ func SearchNewEgg() {
 	// 	panic(err)
 	// }
 	// fmt.Println(Vcards[1:])
+	counter := 0
 	c.OnHTML(".item-promo", func(r *colly.HTMLElement) {
-		count = 0
-		if r.Text != "" {
-			// stock := r.Text
-			Vcards[count].Stock = false
+		if r.Text == "" {
+			fmt.Println(r.Text)
+			fmt.Println(strings.Compare(r.Text, "OUT OF STOCK"))
+			fmt.Println(counter)
+		} else if r.Text == "OUT OF STOCK" {
+			Vcards[counter].Stock = false
 		}
+		counter++
 
-	// 	count++
-
-	// })
+	})
 
 	c.Visit("https://www.newegg.com/p/pl?N=100007709%20601408874")
+
 }

@@ -8,16 +8,7 @@ import (
 	// "net/smtp"
 )
 
-type Vcard struct {
-	Name  string
-	Price string
-	Link  string
-}
-
 func main() {
 	search.SearchNewEgg()
-	// err := internal.Mailinfo()
-	// if err != nil {
-	// 	panic(err)
-	// }
+
 }
