@@ -58,7 +58,6 @@ func SearchNewEgg() {
 			counter++
 		}
 		var stock = func() {
-			fmt.Println(count)
 			for i := counter; i >= 0; i-- {
 				Vcards[count-(i+1)].Stock = false
 			}
