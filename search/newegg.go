@@ -2,7 +2,6 @@ package search
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/brodiep21/4090/internal/vcard"
 	"github.com/gocolly/colly"
@@ -45,7 +44,6 @@ func SearchNewEgg() {
 			return
 		}
 		Vcards[count].Price = cost
-		fmt.Println(Vcards[count])
 		count++
 	})
 
@@ -56,15 +54,16 @@ func SearchNewEgg() {
 	// fmt.Println(Vcards[1:])
 	counter := 0
 	c.OnHTML(".item-promo", func(r *colly.HTMLElement) {
-		if r.Text == "" {
-			fmt.Println(r.Text)
-			fmt.Println(strings.Compare(r.Text, "OUT OF STOCK"))
-			fmt.Println(counter)
-		} else if r.Text == "OUT OF STOCK" {
-			Vcards[counter].Stock = false
+		if r.Text == "OUT OF STOCK" {
+			counter++
 		}
-		counter++
-
+		var stock = func() {
+			fmt.Println(count)
+			for i := counter; i >= 0; i-- {
+				Vcards[count-(i+1)].Stock = false
+			}
+		}
+		defer stock()
 	})
 
 	c.Visit("https://www.newegg.com/p/pl?N=100007709%20601408874")
