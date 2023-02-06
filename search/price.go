@@ -1,8 +1,11 @@
 package search
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
+
+	"github.com/brodiep21/4090/internal/vcard"
 )
 
 func PriceConversion(price string) (int, error) {
@@ -16,4 +19,16 @@ func PriceConversion(price string) (int, error) {
 		return 0, err
 	}
 	return cost, nil
+}
+
+func FindValueCards(Vcards []*vcard.Vcard) {
+	send := []*vcard.Vcard{}
+	for i := 0; i < len(Vcards); i++ {
+		if Vcards[i].Price <= 1850 && Vcards[i].Stock {
+			send = append(send, Vcards[i])
+		}
+
+	}
+	fmt.Println(send)
+	// internal.Mailinfo(send)
 }

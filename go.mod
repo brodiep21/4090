@@ -2,7 +2,10 @@ module github.com/brodiep21/4090
 
 go 1.19
 
-require github.com/gocolly/colly v1.2.0
+require (
+	github.com/gocolly/colly v1.2.0
+	gopkg.in/mail.v2 v2.3.1
+)
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.0 // indirect
@@ -10,7 +13,6 @@ require (
 	github.com/antchfx/htmlquery v1.2.6 // indirect
 	github.com/antchfx/xmlquery v1.3.14 // indirect
 	github.com/antchfx/xpath v1.2.2 // indirect
-	github.com/go-mail/mail v2.3.1+incompatible // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.3.1 // indirect

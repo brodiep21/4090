@@ -3,6 +3,7 @@ package search
 import (
 	"fmt"
 
+	"github.com/brodiep21/4090/internal"
 	"github.com/brodiep21/4090/internal/vcard"
 	"github.com/gocolly/colly"
 )
@@ -47,12 +48,8 @@ func SearchNewEgg() {
 		count++
 	})
 
-	// err := internal.Mailinfo()
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Println(Vcards[1:])
 	counter := 0
+	//check for stock of card
 	c.OnHTML(".item-promo", func(r *colly.HTMLElement) {
 		if r.Text == "OUT OF STOCK" {
 			counter++
@@ -64,6 +61,17 @@ func SearchNewEgg() {
 		}
 		defer stock()
 	})
+	//transfers information over to mailer
+	check := func() {
+		send := []*vcard.Vcard{}
+		for i := 0; i < len(Vcards); i++ {
+			if Vcards[i].Price <= 1850 && Vcards[i].Stock {
+				send = append(send, Vcards[i])
+			}
+		}
+		internal.Mailinfo(send)
+	}
+	defer check()
 
 	c.Visit("https://www.newegg.com/p/pl?N=100007709%20601408874")
 
