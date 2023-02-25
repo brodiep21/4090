@@ -3,7 +3,7 @@ name: cron job
 on:
   #Triggers workflow every minute
   schedule:
-  - cron: "1/2 * * * *"
+  - cron: "25,50 * * * *"
   
 jobs:
   cron:
