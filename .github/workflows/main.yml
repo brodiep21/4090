@@ -1,9 +1,9 @@
 name: Cron Job
 
-on:
-  #Triggers workflow every 30minutes
+on:s
+  #Triggers workflow every minute
   schedule:
-  -cron: "*01 * * * *"
+  - cron: "*01 * * * *"
   
   jobs:
     cron:
