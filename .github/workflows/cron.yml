@@ -3,11 +3,11 @@ name: cron job
 on:
   #Triggers workflow every minute
   schedule:
-  - cron: "25,50 * * * *"
+  - cron: "30,00 * * * *"
   
 jobs:
   cron:
     runs-on: ubuntu-20.04
     steps:
-      - name: cmd
-        run: echo Testing!
+      - name: shcmd
+        run: go run ./cmd/main.go
