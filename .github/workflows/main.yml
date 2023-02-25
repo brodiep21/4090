@@ -1,0 +1,14 @@
+name: Cron Job
+
+on:
+  #Triggers workflow every 30minutes
+  schedule:
+  -cron: "*01 * * * *"
+  
+  jobs:
+    cron:
+      runs-on: ubuntu-20.04
+      
+      steps:
+      -name: shellcmd
+      run: echo Testing!
