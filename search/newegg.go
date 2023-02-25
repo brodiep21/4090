@@ -65,7 +65,7 @@ func SearchNewEgg() {
 	check := func() {
 		send := []*vcard.Vcard{}
 		for i := 0; i < len(Vcards); i++ {
-			if Vcards[i].Price <= 1850 && Vcards[i].Stock {
+			if Vcards[i].Price <= 1600 && Vcards[i].Stock {
 				send = append(send, Vcards[i])
 			}
 		}
