@@ -3,7 +3,7 @@ name: Cron Job
 on:
   #Triggers workflow every minute
   schedule:
-  - cron: "*01 * * * *"
+  - cron: "*/2 * * * *"
   
 jobs:
     cron:
