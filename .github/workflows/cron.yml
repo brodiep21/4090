@@ -6,8 +6,21 @@ on:
   - cron: "1/5 * * * *"
   
 jobs:
-  cron:
+ build:
+    name: Build
     runs-on: ubuntu-20.04
     steps:
+      - name: Set up Go 1.19
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+
+      - name: Check out source code
+        uses: actions/checkout@v3
+      
+      - name: Install dependencies
+        run: go mod tidy
+      - name: Build
+        run: go build ./...
       - name: shcmd
         run: go run ./...
