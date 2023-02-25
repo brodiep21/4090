@@ -1,14 +1,13 @@
-name: Cron Job
+name: cron job
 
 on:
   #Triggers workflow every minute
   schedule:
-  - cron: "*/2 * * * *"
+  - cron: "1/2 * * * *"
   
 jobs:
-    cron:
-      runs-on: ubuntu-20.04
-      
-      steps:
-      - name: shellcmd
+  cron:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: cmd
         run: echo Testing!
