@@ -25,7 +25,7 @@ func Mailinfo(information []*vcard.Vcard) error {
 	m.SetHeader("Subject", "Found cards!")
 
 	m.SetBody("text/html", strings.Join(s[:], "\n"))
-
+	//verify stmp env var via gpass
 	d := mail.NewDialer("smtp.gmail.com", 587, "bpeif21@gmail.com", password)
 	if err := d.DialAndSend(m); err != nil {
 		panic(err)
