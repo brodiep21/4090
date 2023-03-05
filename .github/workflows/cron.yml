@@ -4,7 +4,9 @@ on:
   #Triggers workflow every minute
   schedule:
   - cron: "1/5 * * * *"
-  
+env:
+  # Setting an environment variable with the value of a configuration variable
+  PSWRD: ${{ vars.PSWRD }}
 jobs:
  build:
     name: Build
