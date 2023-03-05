@@ -3,7 +3,7 @@ name: cron job
 on:
   #Triggers workflow every minute
   schedule:
-  - cron: "1/5 * * * *"
+  - cron: "0 0/8 * * *"
 env:
   # Setting an environment variable with the value of a configuration variable
   PSWRD: ${{ secrets.PSWRD }}
