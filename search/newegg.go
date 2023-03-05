@@ -8,7 +8,7 @@ import (
 	"github.com/gocolly/colly"
 )
 
-func SearchNewEgg() {
+func SearchNewEgg(pass string) error {
 	Vcards := []*vcard.Vcard{}
 
 	c := colly.NewCollector(colly.AllowedDomains("www.newegg.com"))
@@ -61,18 +61,35 @@ func SearchNewEgg() {
 		}
 		defer stock()
 	})
-	//transfers information over to mailer
-	check := func() {
-		send := []*vcard.Vcard{}
-		for i := 0; i < len(Vcards); i++ {
-			if Vcards[i].Price <= 1600 && Vcards[i].Stock {
-				send = append(send, Vcards[i])
-			}
-		}
-		internal.Mailinfo(send)
-	}
-	defer check()
 
 	c.Visit("https://www.newegg.com/p/pl?N=100007709%20601408874")
+	//transfers information over to mailer
 
+	filteredVcards, err := check(Vcards)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("found %d cards\n \n", len(filteredVcards))
+
+	if len(filteredVcards) == 0 {
+		fmt.Println("no cards less than 1600 found")
+		return nil
+	}
+
+	err = internal.MailInfo(pass, filteredVcards)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func check(vcards []*vcard.Vcard) ([]*vcard.Vcard, error) {
+	send := []*vcard.Vcard{}
+	for i := 0; i < len(vcards); i++ {
+		if vcards[i].Price <= 1900 && vcards[i].Stock {
+			send = append(send, vcards[i])
+		}
+	}
+	return send, nil
 }
