@@ -87,7 +87,7 @@ func SearchNewEgg(pass string) error {
 func check(vcards []*vcard.Vcard) ([]*vcard.Vcard, error) {
 	send := []*vcard.Vcard{}
 	for i := 0; i < len(vcards); i++ {
-		if vcards[i].Price <= 1900 && vcards[i].Stock {
+		if vcards[i].Price <= 1600 && vcards[i].Stock {
 			send = append(send, vcards[i])
 		}
 	}
